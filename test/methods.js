@@ -1,3 +1,4 @@
+/* eslint-env mocha */
 'use strict'
 
 var expect = require('chai').expect
@@ -31,7 +32,6 @@ describe('methods', function () {
     .post('/v1/search', JSON.stringify(query))
     .query({ options: 'all' })
     .reply(200, 'body')
-
 
     return inst.search(query, { options: 'all' })
     .then(assertBasicResp)

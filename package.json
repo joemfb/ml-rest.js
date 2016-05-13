@@ -4,6 +4,7 @@
   "description": "a lightweight JS client for the MarkLogic REST API",
   "main": "index.js",
   "scripts": {
+    "lint": "standard *.js **/*.js",
     "test": "istanbul cover _mocha"
   },
   "author": "joemfb",
@@ -17,7 +18,8 @@
     "chai": "^3.5.0",
     "istanbul": "^0.4.3",
     "mocha": "^2.4.5",
-    "nock": "^8.0.0"
+    "nock": "^8.0.0",
+    "standard": "^7.0.1"
   },
   "directories": {
     "test": "test"

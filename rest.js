@@ -1,3 +1,4 @@
+/* global fetch Headers Response URL URLSearchParams define */
 (function (self, factory) {
   'use strict'
 
@@ -468,7 +469,7 @@
     return tx
   }
 
-  /*** utility functions ***/
+  /* utility functions */
 
   function toParams (arg) {
     if (arg instanceof URLSearchParams) return arg
@@ -494,12 +495,12 @@
     return params
   }
 
-  function isParams(query) {
+  function isParams (query) {
     return query && (!(query.query || query.qtext) &&
            (query.options ? typeof query.options === 'string' : true))
   }
 
-  function validateArgs(url, params, req) {
+  function validateArgs (url, params, req) {
     if (!(url instanceof URL)) throw new Error('bad url')
     if (!(params instanceof URLSearchParams)) throw new Error('bad params')
     if (typeof req !== 'object') throw new Error('bad request')

@@ -1,3 +1,5 @@
+/* eslint-env mocha */
+/* global Headers URL URLSearchParams */
 'use strict'
 
 var expect = require('chai').expect
