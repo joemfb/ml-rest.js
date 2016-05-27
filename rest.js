@@ -99,7 +99,7 @@
   }
 
   MLRest.prototype.search = function (query, params) {
-    if (!params && isParams(query)) {
+    if (!params && query && !query.search) {
       params = query
       query = null
     }
@@ -114,7 +114,7 @@
   // MLRest.prototype.qbe = function (query, params) {}
 
   MLRest.prototype.suggest = function (prefix, query, params) {
-    if (!params && isParams(query)) {
+    if (!params && query && !query.search) {
       params = query
       query = null
     }
@@ -140,7 +140,7 @@
       throw new Error('missing values definition name')
     }
 
-    if (!params && isParams(query)) {
+    if (!params && query && !query.search) {
       params = query
       query = null
     }
@@ -493,11 +493,6 @@
     }
 
     return params
-  }
-
-  function isParams (query) {
-    return query && (!(query.query || query.qtext) &&
-           (query.options ? typeof query.options === 'string' : true))
   }
 
   function validateArgs (url, params, req) {

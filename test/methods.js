@@ -48,7 +48,7 @@ describe('methods', function () {
   })
 
   it('should disambiguate query and params', function () {
-    var combined = { options: { 'return-query': 1 } }
+    var combined = { search: { options: { 'return-query': 1 } } }
 
     nock('http://example.com')
     .post('/v1/search', JSON.stringify(combined))
@@ -104,7 +104,7 @@ describe('methods', function () {
   })
 
   it('should get suggestions with query', function () {
-    var query = { query: { queries: { 'and-query': [] } } }
+    var query = { search: { query: { queries: { 'and-query': [] } } } }
 
     nock('http://example.com')
     .post('/v1/suggest', JSON.stringify(query))
@@ -138,7 +138,7 @@ describe('methods', function () {
   })
 
   it('should get values with query', function () {
-    var query = { query: { queries: { 'and-query': [] } } }
+    var query = { search: { query: { queries: { 'and-query': [] } } } }
 
     nock('http://example.com')
     .post('/v1/values/blah', JSON.stringify(query))
