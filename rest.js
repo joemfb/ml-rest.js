@@ -111,7 +111,9 @@
   }
 
   // TODO:
-  // MLRest.prototype.qbe = function (query, params) {}
+  MLRest.prototype.qbe = function (query, params) {
+    throw new Error('unimplemented')
+  }
 
   MLRest.prototype.suggest = function (prefix, query, params) {
     if (!params && query && !query.search) {
@@ -237,7 +239,9 @@
   }
 
   // TODO:
-  // MLRest.prototype.patch = function (uri, patch, params) {}
+  MLRest.prototype.patch = function (uri, patch, params) {
+    throw new Error('unimplemented')
+  }
 
   MLRest.prototype.listGraphs = function () {
     return this.request('/graphs', null, {
@@ -301,10 +305,12 @@
 
   // TODO: create/delete triples/graph
 
-  // TODO: sparqlUpdate
-
   // TODO:
-  // MLRest.prototype.sparql = function (query) {}
+  MLRest.prototype.sparql = function (query) {
+    throw new Error('unimplemented')
+  }
+
+  // TODO: separate sparqlUpdate method?
 
   MLRest.prototype.listOptions = function () {
     return this.request('/config/query')
@@ -318,9 +324,15 @@
   }
 
   // TODO:
-  // MLRest.prototype.extension = function (name, params) {}
-  // MLRest.prototype.eval = function (code, params) {}
-  // MLRest.prototype.invoke = function (uri, params) {}
+  MLRest.prototype.extension = function (name, params) {
+    throw new Error('unimplemented')
+  }
+  MLRest.prototype.eval = function (code, params) {
+    throw new Error('unimplemented')
+  }
+  MLRest.prototype.invoke = function (uri, params) {
+    throw new Error('unimplemented')
+  }
 
   MLRest.prototype.database = function (name) {
     if (typeof name !== 'string') {

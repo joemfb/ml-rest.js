@@ -59,7 +59,7 @@ describe('methods', function () {
   })
 
   it('should qbe', function () {
-    expect(inst.qbe).not.to.be.undefined
+    expect(inst.qbe).to.be.a.instanceof(Function)
   })
 
   it('should get default suggestions (1)', function () {
@@ -275,7 +275,7 @@ describe('methods', function () {
   })
 
   it('should patch a doc', function () {
-    expect(inst.patch).not.to.be.undefined
+    expect(inst.patch).to.be.a.instanceof(Function)
   })
 
   it('should list graphs', function () {
@@ -377,7 +377,7 @@ describe('methods', function () {
   })
 
   it('should evaluate a sparql query', function () {
-    expect(inst.sparql).not.to.be.undefined
+    expect(inst.sparql).to.be.a.instanceof(Function)
   })
 
   it('should list options', function () {
@@ -403,14 +403,14 @@ describe('methods', function () {
   })
 
   it('should invoke an extension', function () {
-    expect(inst.extension).not.to.be.undefined
+    expect(inst.extension).to.be.a.instanceof(Function)
   })
 
   it('should eval an expression', function () {
-    expect(inst.eval).not.to.be.undefined
+    expect(inst.eval).to.be.a.instanceof(Function)
   })
 
   it('should invoke a module', function () {
-    expect(inst.invoke).not.to.be.undefined
+    expect(inst.invoke).to.be.a.instanceof(Function)
   })
 })
