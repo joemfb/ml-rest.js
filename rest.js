@@ -17,19 +17,19 @@
   // https://www.npmjs.com/package/isomorphic-fetch
 
   if (typeof fetch !== 'function') {
-    throw new Error('missing dependency: fetch')
+    throw new TypeError('missing dependency: fetch')
   }
   if (typeof Headers !== 'function') {
-    throw new Error('missing dependency: Headers')
+    throw new TypeError('missing dependency: Headers')
   }
   if (typeof Response !== 'function') {
-    throw new Error('missing dependency: Response')
+    throw new TypeError('missing dependency: Response')
   }
   if (typeof URL !== 'function') {
-    throw new Error('missing dependency: URL')
+    throw new TypeError('missing dependency: URL')
   }
   if (typeof URLSearchParams !== 'function') {
-    throw new Error('missing dependency: URLSearchParams')
+    throw new TypeError('missing dependency: URLSearchParams')
   }
   // if (!'assign' in Object) {
   //   throw new Error('missing Object.assign')
@@ -52,7 +52,7 @@
     this.baseURI = options.baseURI || (document && document.baseURI)
 
     if (!this.baseURI) {
-      throw new Error('missing base uri')
+      throw new TypeError('missing base uri')
     }
 
     this.requestOpts = Object.assign({}, requestOpts, options.request)
@@ -139,7 +139,7 @@
 
   MLRest.prototype.values = function (name, query, params) {
     if (typeof name !== 'string') {
-      throw new Error('missing values definition name')
+      throw new TypeError('missing values definition name')
     }
 
     if (!params && query && !query.search) {
@@ -155,7 +155,7 @@
 
   MLRest.prototype.doc = function (uri, params) {
     if (typeof uri !== 'string') {
-      throw new Error('missing document URI')
+      throw new TypeError('missing document URI')
     }
 
     params = toParams(params)
@@ -190,7 +190,7 @@
 
   MLRest.prototype.update = function (uri, content, params) {
     if (typeof uri !== 'string') {
-      throw new Error('missing document URI')
+      throw new TypeError('missing document URI')
     }
 
     params = toParams(params)
@@ -204,7 +204,7 @@
 
   MLRest.prototype.delete = function (uri, params) {
     if (typeof uri !== 'string') {
-      throw new Error('missing document URI')
+      throw new TypeError('missing document URI')
     }
 
     params = toParams(params)
@@ -235,7 +235,7 @@
       })
     }
 
-    throw new Error('bad args')
+    throw new TypeError('bad args')
   }
 
   // TODO:
@@ -294,7 +294,7 @@
         params.append('iri', iri)
       })
     } else {
-      throw new Error('bad args')
+      throw new TypeError('bad args')
     }
 
     return this.request('/graphs/things', params, {
@@ -318,7 +318,7 @@
 
   MLRest.prototype.options = function (name) {
     if (typeof name !== 'string') {
-      throw new Error('missing name')
+      throw new TypeError('missing name')
     }
     return this.request('/config/query/' + name)
   }
@@ -336,7 +336,7 @@
 
   MLRest.prototype.database = function (name) {
     if (typeof name !== 'string') {
-      throw new Error('missing database name')
+      throw new TypeError('missing database name')
     }
 
     var db = new MLRest(this)
@@ -360,14 +360,14 @@
 
   MLRest.prototype.transactionDetails = function (txId) {
     if (typeof txId !== 'string') {
-      throw new Error('missing transaction id')
+      throw new TypeError('missing transaction id')
     }
     return this.request('/transactions/' + txId)
   }
 
   MLRest.prototype.commitTransaction = function (txId) {
     if (typeof txId !== 'string') {
-      throw new Error('missing transaction id')
+      throw new TypeError('missing transaction id')
     }
     return this.request('/transactions/' + txId, { result: 'commit' }, {
       method: 'POST'
@@ -376,7 +376,7 @@
 
   MLRest.prototype.rollbackTransaction = function (txId) {
     if (typeof txId !== 'string') {
-      throw new Error('missing transaction id')
+      throw new TypeError('missing transaction id')
     }
     return this.request('/transactions/' + txId, { result: 'rollback' }, {
       method: 'POST'
@@ -418,7 +418,7 @@
       txId = details && details['transaction-status'] &&
              details['transaction-status']['transaction-id']
 
-      if (!txId) throw new Error('unknown structure')
+      if (!txId) throw new TypeError('unknown structure')
     })
     .catch(function (err) {
       done('failed')
@@ -508,9 +508,9 @@
   }
 
   function validateArgs (url, params, req) {
-    if (!(url instanceof URL)) throw new Error('bad url')
-    if (!(params instanceof URLSearchParams)) throw new Error('bad params')
-    if (typeof req !== 'object') throw new Error('bad request')
+    if (!(url instanceof URL)) throw new TypeError('bad url')
+    if (!(params instanceof URLSearchParams)) throw new TypeError('bad params')
+    if (typeof req !== 'object') throw new TypeError('bad request')
   }
 
   return MLRest
