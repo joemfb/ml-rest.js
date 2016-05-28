@@ -1,517 +1,532 @@
-/* global fetch Headers Response URL URLSearchParams define */
+/* global define */
 (function (self, factory) {
   'use strict'
 
-  if (typeof define === 'function' && define.amd) {
-    define([], factory)
-  } else if (typeof module === 'object' && typeof module.exports === 'object') {
-    module.exports = factory()
-  } else {
-    self.MLRest = factory()
+  var g = typeof global === 'object' && global
+  if (g.global === g || g.window === g || g.self === g) {
+    self = g
   }
-}(this, function () {
+
+  if (typeof define === 'function' && define.amd) {
+    define([], factory(self))
+  } else if (typeof module === 'object' && typeof module.exports === 'object') {
+    module.exports = factory(self)
+  } else {
+    self.mlRestFactory = factory(self)
+  }
+}(this, function (self) {
   'use strict'
 
-  // var document = typeof document === 'object' ? document : null
+  return function (deps) {
+    deps = deps || {}
 
-  // https://www.npmjs.com/package/isomorphic-fetch
+    var fetch = deps.fetch || self.fetch
+    if (typeof fetch !== 'function') {
+      throw new TypeError('missing dependency: fetch')
+    }
 
-  if (typeof fetch !== 'function') {
-    throw new TypeError('missing dependency: fetch')
-  }
-  if (typeof Headers !== 'function') {
-    throw new TypeError('missing dependency: Headers')
-  }
-  if (typeof Response !== 'function') {
-    throw new TypeError('missing dependency: Response')
-  }
-  if (typeof URL !== 'function') {
-    throw new TypeError('missing dependency: URL')
-  }
-  if (typeof URLSearchParams !== 'function') {
-    throw new TypeError('missing dependency: URLSearchParams')
-  }
-  // if (!'assign' in Object) {
-  //   throw new Error('missing Object.assign')
-  // }
+    var Headers = deps.Headers || self.Headers
+    if (typeof Headers !== 'function') {
+      throw new TypeError('missing dependency: Headers')
+    }
 
-  // window.Promise (removed)
+    var Response = deps.Response || self.Response
+    if (typeof Response !== 'function') {
+      throw new TypeError('missing dependency: Response')
+    }
 
-  // TODO: default CORS?
-  var requestOpts = { credentials: 'same-origin' }
+    var URL = deps.URL || self.URL
+    if (typeof URL !== 'function') {
+      throw new TypeError('missing dependency: URL')
+    }
 
-  function MLRest (options) {
-    if (!(this instanceof MLRest)) {
+    var URLSearchParams = deps.URLSearchParams || self.URLSearchParams
+    if (typeof URLSearchParams !== 'function') {
+      throw new TypeError('missing dependency: URLSearchParams')
+    }
+
+    // if (!'assign' in Object) {
+    //   throw new Error('missing Object.assign')
+    // }
+
+    // window.Promise (removed)
+
+    // TODO: default CORS?
+    var requestOpts = { credentials: 'same-origin' }
+
+    function MLRest (options) {
+      if (!(this instanceof MLRest)) {
+        return new MLRest(options)
+      }
+
+      options = options || {}
+
+      this.endpoint = options.endpoint || '/'
+      this.version = options.version || 'v1'
+      this.baseURI = options.baseURI || (document && document.baseURI)
+
+      if (!this.baseURI) {
+        throw new TypeError('missing base uri')
+      }
+
+      this.requestOpts = Object.assign({}, requestOpts, options.request)
+    }
+
+    MLRest.create = function (options) {
       return new MLRest(options)
     }
 
-    options = options || {}
-
-    this.endpoint = options.endpoint || '/'
-    this.version = options.version || 'v1'
-    this.baseURI = options.baseURI || (document && document.baseURI)
-
-    if (!this.baseURI) {
-      throw new TypeError('missing base uri')
+    MLRest.prototype._request = function (url, params, req) {
+      validateArgs(url, params, req)
+      url.search = params
+      return fetch(url.toString(), req)
     }
 
-    this.requestOpts = Object.assign({}, requestOpts, options.request)
-  }
+    MLRest.prototype.request = function (endpoint, params, req) {
+      req = Object.assign({}, this.requestOpts, req)
 
-  MLRest.create = function (options) {
-    return new MLRest(options)
-  }
+      if (!req.headers) {
+        req.headers = new Headers()
+      } else if (!(req.headers instanceof Headers)) {
+        req.headers = new Headers(req.headers)
+      }
 
-  MLRest.prototype._request = function (url, params, req) {
-    validateArgs(url, params, req)
-    url.search = params
-    return fetch(url.toString(), req)
-  }
+      if (!req.headers.has('Accept')) {
+        req.headers.set('Accept', 'application/json')
+      }
+      if (!req.headers.has('Content-Type')) {
+        req.headers.set('Content-Type', 'application/json')
+      }
 
-  MLRest.prototype.request = function (endpoint, params, req) {
-    req = Object.assign({}, this.requestOpts, req)
+      var relativeURL
 
-    if (!req.headers) {
-      req.headers = new Headers()
-    } else if (!(req.headers instanceof Headers)) {
-      req.headers = new Headers(req.headers)
+      if (/^\/v1\//.test(endpoint)) {
+        // TODO: include this.endpoint ?
+        relativeURL = endpoint
+      } else {
+        relativeURL = this.endpoint + this.version + (/^\//.test(endpoint) ? '' : '/') + endpoint
+      }
+
+      var url = new URL(relativeURL, this.baseURI)
+
+      return this._request(url, toParams(params), req)
     }
 
-    if (!req.headers.has('Accept')) {
-      req.headers.set('Accept', 'application/json')
-    }
-    if (!req.headers.has('Content-Type')) {
-      req.headers.set('Content-Type', 'application/json')
-    }
+    MLRest.prototype.search = function (query, params) {
+      if (!params && query && !query.search) {
+        params = query
+        query = null
+      }
 
-    var relativeURL
-
-    if (/^\/v1\//.test(endpoint)) {
-      // TODO: include this.endpoint ?
-      relativeURL = endpoint
-    } else {
-      relativeURL = this.endpoint + this.version + (/^\//.test(endpoint) ? '' : '/') + endpoint
+      return this.request('/search', params, {
+        method: 'POST',
+        body: JSON.stringify(query)
+      })
     }
 
-    var url = new URL(relativeURL, this.baseURI)
-
-    return this._request(url, toParams(params), req)
-  }
-
-  MLRest.prototype.search = function (query, params) {
-    if (!params && query && !query.search) {
-      params = query
-      query = null
+    // TODO:
+    MLRest.prototype.qbe = function (query, params) {
+      throw new Error('unimplemented')
     }
 
-    return this.request('/search', params, {
-      method: 'POST',
-      body: JSON.stringify(query)
-    })
-  }
+    MLRest.prototype.suggest = function (prefix, query, params) {
+      if (!params && query && !query.search) {
+        params = query
+        query = null
+      }
 
-  // TODO:
-  MLRest.prototype.qbe = function (query, params) {
-    throw new Error('unimplemented')
-  }
-
-  MLRest.prototype.suggest = function (prefix, query, params) {
-    if (!params && query && !query.search) {
-      params = query
-      query = null
-    }
-
-    params = toParams(params)
-
-    if (prefix) {
-      params.set('partial-q', prefix)
-    }
-
-    return this.request('/suggest', params, {
-      method: 'POST',
-      body: JSON.stringify(query)
-    })
-  }
-
-  MLRest.prototype.listValues = function (params) {
-    return this.request('/values', params)
-  }
-
-  MLRest.prototype.values = function (name, query, params) {
-    if (typeof name !== 'string') {
-      throw new TypeError('missing values definition name')
-    }
-
-    if (!params && query && !query.search) {
-      params = query
-      query = null
-    }
-
-    return this.request('/values/' + name, params, {
-      method: 'POST',
-      body: JSON.stringify(query)
-    })
-  }
-
-  MLRest.prototype.doc = function (uri, params) {
-    if (typeof uri !== 'string') {
-      throw new TypeError('missing document URI')
-    }
-
-    params = toParams(params)
-    params.set('uri', uri)
-
-    return this.request('/documents', params)
-  }
-
-  MLRest.prototype.create = function (uri, content, params) {
-    var method
-
-    if (typeof uri === 'object') {
-      params = content
-      content = uri
-      uri = null
-      method = 'POST'
-    } else {
-      method = 'PUT'
-    }
-
-    params = toParams(params)
-
-    if (uri) {
-      params.set('uri', uri)
-    }
-
-    return this.request('/documents', params, {
-      method: method,
-      body: JSON.stringify(content)
-    })
-  }
-
-  MLRest.prototype.update = function (uri, content, params) {
-    if (typeof uri !== 'string') {
-      throw new TypeError('missing document URI')
-    }
-
-    params = toParams(params)
-    params.set('uri', uri)
-
-    return this.request('/documents', params, {
-      method: 'PUT',
-      body: JSON.stringify(content)
-    })
-  }
-
-  MLRest.prototype.delete = function (uri, params) {
-    if (typeof uri !== 'string') {
-      throw new TypeError('missing document URI')
-    }
-
-    params = toParams(params)
-    params.set('uri', uri)
-
-    return this.request('/documents', params, {
-      method: 'DELETE'
-    })
-  }
-
-  MLRest.prototype.deleteAll = function (uris, params) {
-    // TODO: every is string ...
-    if (Array.isArray(uris)) {
       params = toParams(params)
 
-      uris.forEach(function (uri) {
-        params.append('uri', uri)
+      if (prefix) {
+        params.set('partial-q', prefix)
+      }
+
+      return this.request('/suggest', params, {
+        method: 'POST',
+        body: JSON.stringify(query)
       })
+    }
+
+    MLRest.prototype.listValues = function (params) {
+      return this.request('/values', params)
+    }
+
+    MLRest.prototype.values = function (name, query, params) {
+      if (typeof name !== 'string') {
+        throw new TypeError('missing values definition name')
+      }
+
+      if (!params && query && !query.search) {
+        params = query
+        query = null
+      }
+
+      return this.request('/values/' + name, params, {
+        method: 'POST',
+        body: JSON.stringify(query)
+      })
+    }
+
+    MLRest.prototype.doc = function (uri, params) {
+      if (typeof uri !== 'string') {
+        throw new TypeError('missing document URI')
+      }
+
+      params = toParams(params)
+      params.set('uri', uri)
+
+      return this.request('/documents', params)
+    }
+
+    MLRest.prototype.create = function (uri, content, params) {
+      var method
+
+      if (typeof uri === 'object') {
+        params = content
+        content = uri
+        uri = null
+        method = 'POST'
+      } else {
+        method = 'PUT'
+      }
+
+      params = toParams(params)
+
+      if (uri) {
+        params.set('uri', uri)
+      }
+
+      return this.request('/documents', params, {
+        method: method,
+        body: JSON.stringify(content)
+      })
+    }
+
+    MLRest.prototype.update = function (uri, content, params) {
+      if (typeof uri !== 'string') {
+        throw new TypeError('missing document URI')
+      }
+
+      params = toParams(params)
+      params.set('uri', uri)
+
+      return this.request('/documents', params, {
+        method: 'PUT',
+        body: JSON.stringify(content)
+      })
+    }
+
+    MLRest.prototype.delete = function (uri, params) {
+      if (typeof uri !== 'string') {
+        throw new TypeError('missing document URI')
+      }
+
+      params = toParams(params)
+      params.set('uri', uri)
 
       return this.request('/documents', params, {
         method: 'DELETE'
       })
     }
 
-    if (!arguments.length || (!params && uris && typeof uris === 'object')) {
-      return this.request('/search', toParams(uris), {
-        method: 'DELETE'
-      })
-    }
+    MLRest.prototype.deleteAll = function (uris, params) {
+      // TODO: every is string ...
+      if (Array.isArray(uris)) {
+        params = toParams(params)
 
-    throw new TypeError('bad args')
-  }
-
-  // TODO:
-  MLRest.prototype.patch = function (uri, patch, params) {
-    throw new Error('unimplemented')
-  }
-
-  MLRest.prototype.listGraphs = function () {
-    return this.request('/graphs', null, {
-      method: 'GET',
-      headers: { Accept: 'text/uri-list' }
-    })
-    .then(function (resp) {
-      if (!resp.ok) return resp
-
-      return resp.text().then(function (txt) {
-        var data = txt.split(/\n/).filter(function (line) {
-          return line.length
+        uris.forEach(function (uri) {
+          params.append('uri', uri)
         })
 
-        // note: this doesn't set URL
-        return new Response(JSON.stringify(data), resp)
-      })
-    })
-  }
+        return this.request('/documents', params, {
+          method: 'DELETE'
+        })
+      }
 
-  // TODO: debug
-  MLRest.prototype.graph = function (uri, params) {
-    if (!arguments.length || !params && typeof uri === 'object') {
-      params = uri
-      uri = null
-    }
+      if (!arguments.length || (!params && uris && typeof uris === 'object')) {
+        return this.request('/search', toParams(uris), {
+          method: 'DELETE'
+        })
+      }
 
-    params = toParams(params)
-
-    if (uri) {
-      params.set('graph', uri)
-    } else {
-      params.set('default', '')
-    }
-
-    return this.request('/graphs', params, {
-      method: 'GET',
-      headers: { 'Accept': 'application/rdf+json' }
-    })
-  }
-
-  MLRest.prototype.things = function (iris, params) {
-    params = toParams(params)
-
-    if (typeof iris === 'string') {
-      params.set('iri', iris)
-      // TODO: every is string
-    } else if (Array.isArray(iris)) {
-      iris.forEach(function (iri) {
-        params.append('iri', iri)
-      })
-    } else {
       throw new TypeError('bad args')
     }
 
-    return this.request('/graphs/things', params, {
-      method: 'GET',
-      headers: { 'Accept': 'application/rdf+json' }
-    })
-  }
-
-  // TODO: create/delete triples/graph
-
-  // TODO:
-  MLRest.prototype.sparql = function (query) {
-    throw new Error('unimplemented')
-  }
-
-  // TODO: separate sparqlUpdate method?
-
-  MLRest.prototype.listOptions = function () {
-    return this.request('/config/query')
-  }
-
-  MLRest.prototype.options = function (name) {
-    if (typeof name !== 'string') {
-      throw new TypeError('missing name')
-    }
-    return this.request('/config/query/' + name)
-  }
-
-  // TODO:
-  MLRest.prototype.extension = function (name, params) {
-    throw new Error('unimplemented')
-  }
-  MLRest.prototype.eval = function (code, params) {
-    throw new Error('unimplemented')
-  }
-  MLRest.prototype.invoke = function (uri, params) {
-    throw new Error('unimplemented')
-  }
-
-  MLRest.prototype.database = function (name) {
-    if (typeof name !== 'string') {
-      throw new TypeError('missing database name')
+    // TODO:
+    MLRest.prototype.patch = function (uri, patch, params) {
+      throw new Error('unimplemented')
     }
 
-    var db = new MLRest(this)
+    MLRest.prototype.listGraphs = function () {
+      return this.request('/graphs', null, {
+        method: 'GET',
+        headers: { Accept: 'text/uri-list' }
+      })
+      .then(function (resp) {
+        if (!resp.ok) return resp
 
-    db._request = function (url, params, req) {
-      validateArgs(url, params, req)
-      params.set('database', name)
-      url.search = params
-      return fetch(url.toString(), req)
+        return resp.text().then(function (txt) {
+          var data = txt.split(/\n/).filter(function (line) {
+            return line.length
+          })
+
+          // note: this doesn't set URL
+          return new Response(JSON.stringify(data), resp)
+        })
+      })
     }
 
-    db.database = null
-
-    return db
-  }
-
-  // TODO: name, params
-  MLRest.prototype.openTransaction = function () {
-    return this.request('/transactions', null, { method: 'POST' })
-  }
-
-  MLRest.prototype.transactionDetails = function (txId) {
-    if (typeof txId !== 'string') {
-      throw new TypeError('missing transaction id')
-    }
-    return this.request('/transactions/' + txId)
-  }
-
-  MLRest.prototype.commitTransaction = function (txId) {
-    if (typeof txId !== 'string') {
-      throw new TypeError('missing transaction id')
-    }
-    return this.request('/transactions/' + txId, { result: 'commit' }, {
-      method: 'POST'
-    })
-  }
-
-  MLRest.prototype.rollbackTransaction = function (txId) {
-    if (typeof txId !== 'string') {
-      throw new TypeError('missing transaction id')
-    }
-    return this.request('/transactions/' + txId, { result: 'rollback' }, {
-      method: 'POST'
-    })
-  }
-
-  // TODO: name, params
-  MLRest.prototype.transaction = function () {
-    var self = this
-    var tx = new MLRest(self)
-    var txId = null
-
-    tx.status = 'uninitialized'
-
-    function done (status) {
-      tx.status = status
-      txId = null
-
-      function closed () {
-        throw new Error('transaction closed: ' + status)
+    // TODO: debug
+    MLRest.prototype.graph = function (uri, params) {
+      if (!arguments.length || !params && typeof uri === 'object') {
+        params = uri
+        uri = null
       }
 
-      tx.details = closed
-      tx.commit = closed
-      tx.rollback = closed
-      tx._request = closed
-      // txPromise = Promise.reject()
+      params = toParams(params)
+
+      if (uri) {
+        params.set('graph', uri)
+      } else {
+        params.set('default', '')
+      }
+
+      return this.request('/graphs', params, {
+        method: 'GET',
+        headers: { 'Accept': 'application/rdf+json' }
+      })
     }
 
-    // open new transaction
-    var txPromise = self.openTransaction()
-    .then(function (resp) {
-      if (!resp.ok) throw new Error('bad response')
+    MLRest.prototype.things = function (iris, params) {
+      params = toParams(params)
 
-      return resp.json()
-    })
-    .then(function (details) {
-      tx.status = 'open'
-      txId = details && details['transaction-status'] &&
-             details['transaction-status']['transaction-id']
+      if (typeof iris === 'string') {
+        params.set('iri', iris)
+        // TODO: every is string
+      } else if (Array.isArray(iris)) {
+        iris.forEach(function (iri) {
+          params.append('iri', iri)
+        })
+      } else {
+        throw new TypeError('bad args')
+      }
 
-      if (!txId) throw new TypeError('unknown structure')
-    })
-    .catch(function (err) {
-      done('failed')
-      throw new Error(err)
-    })
+      return this.request('/graphs/things', params, {
+        method: 'GET',
+        headers: { 'Accept': 'application/rdf+json' }
+      })
+    }
 
-    tx._request = function (url, params, req) {
-      validateArgs(url, params, req)
-      // block requests until transaction is opened
-      return txPromise.then(function () {
-        params.set('txid', txId)
+    // TODO: create/delete triples/graph
+
+    // TODO:
+    MLRest.prototype.sparql = function (query) {
+      throw new Error('unimplemented')
+    }
+
+    // TODO: separate sparqlUpdate method?
+
+    MLRest.prototype.listOptions = function () {
+      return this.request('/config/query')
+    }
+
+    MLRest.prototype.options = function (name) {
+      if (typeof name !== 'string') {
+        throw new TypeError('missing name')
+      }
+      return this.request('/config/query/' + name)
+    }
+
+    // TODO:
+    MLRest.prototype.extension = function (name, params) {
+      throw new Error('unimplemented')
+    }
+    MLRest.prototype.eval = function (code, params) {
+      throw new Error('unimplemented')
+    }
+    MLRest.prototype.invoke = function (uri, params) {
+      throw new Error('unimplemented')
+    }
+
+    MLRest.prototype.database = function (name) {
+      if (typeof name !== 'string') {
+        throw new TypeError('missing database name')
+      }
+
+      var db = new MLRest(this)
+
+      db._request = function (url, params, req) {
+        validateArgs(url, params, req)
+        params.set('database', name)
         url.search = params
         return fetch(url.toString(), req)
+      }
+
+      db.database = null
+
+      return db
+    }
+
+    // TODO: name, params
+    MLRest.prototype.openTransaction = function () {
+      return this.request('/transactions', null, { method: 'POST' })
+    }
+
+    MLRest.prototype.transactionDetails = function (txId) {
+      if (typeof txId !== 'string') {
+        throw new TypeError('missing transaction id')
+      }
+      return this.request('/transactions/' + txId)
+    }
+
+    MLRest.prototype.commitTransaction = function (txId) {
+      if (typeof txId !== 'string') {
+        throw new TypeError('missing transaction id')
+      }
+      return this.request('/transactions/' + txId, { result: 'commit' }, {
+        method: 'POST'
       })
     }
 
-    // add tx methods
-    tx.details = function () {
-      return txPromise.then(function () {
-        return self.transactionDetails(txId)
+    MLRest.prototype.rollbackTransaction = function (txId) {
+      if (typeof txId !== 'string') {
+        throw new TypeError('missing transaction id')
+      }
+      return this.request('/transactions/' + txId, { result: 'rollback' }, {
+        method: 'POST'
       })
     }
 
-    // TODO: collect all _request promises and
-    // await them all before commit/rollback?
+    // TODO: name, params
+    MLRest.prototype.transaction = function () {
+      var self = this
+      var tx = new MLRest(self)
+      var txId = null
 
-    tx.commit = function () {
-      return txPromise.then(function () {
-        return self.commitTransaction(txId)
-        .then(function (resp) {
-          if (resp.ok) {
-            done('committed')
-          } else {
-            done('failed')
-          }
-          return resp
-        })
-      })
-    }
+      tx.status = 'uninitialized'
 
-    tx.rollback = function () {
-      return txPromise.then(function () {
-        return self.rollbackTransaction(txId)
-        .then(function (resp) {
-          if (resp.ok) {
-            done('committed')
-          } else {
-            done('failed')
-          }
-          return resp
-        })
-      })
-    }
+      function done (status) {
+        tx.status = status
+        txId = null
 
-    // remove methods
-    // TODO: others?
-    tx.transaction = null
-    tx.suggest = null
-
-    return tx
-  }
-
-  /* utility functions */
-
-  function toParams (arg) {
-    if (arg instanceof URLSearchParams) return arg
-
-    var params = new URLSearchParams()
-
-    if (arg && typeof arg === 'object') {
-      Object.keys(arg).forEach(function (key) {
-        var val = arg[key]
-
-        if (val == null) return
-
-        if (Array.isArray(val)) {
-          val.forEach(function (val) {
-            params.append(key, val)
-          })
-        } else {
-          params.set(key, val)
+        function closed () {
+          throw new Error('transaction closed: ' + status)
         }
+
+        tx.details = closed
+        tx.commit = closed
+        tx.rollback = closed
+        tx._request = closed
+        // txPromise = Promise.reject()
+      }
+
+      // open new transaction
+      var txPromise = self.openTransaction()
+      .then(function (resp) {
+        if (!resp.ok) throw new Error('bad response')
+
+        return resp.json()
       })
+      .then(function (details) {
+        tx.status = 'open'
+        txId = details && details['transaction-status'] &&
+               details['transaction-status']['transaction-id']
+
+        if (!txId) throw new TypeError('unknown structure')
+      })
+      .catch(function (err) {
+        done('failed')
+        throw new Error(err)
+      })
+
+      tx._request = function (url, params, req) {
+        validateArgs(url, params, req)
+        // block requests until transaction is opened
+        return txPromise.then(function () {
+          params.set('txid', txId)
+          url.search = params
+          return fetch(url.toString(), req)
+        })
+      }
+
+      // add tx methods
+      tx.details = function () {
+        return txPromise.then(function () {
+          return self.transactionDetails(txId)
+        })
+      }
+
+      // TODO: collect all _request promises and
+      // await them all before commit/rollback?
+
+      tx.commit = function () {
+        return txPromise.then(function () {
+          return self.commitTransaction(txId)
+          .then(function (resp) {
+            if (resp.ok) {
+              done('committed')
+            } else {
+              done('failed')
+            }
+            return resp
+          })
+        })
+      }
+
+      tx.rollback = function () {
+        return txPromise.then(function () {
+          return self.rollbackTransaction(txId)
+          .then(function (resp) {
+            if (resp.ok) {
+              done('committed')
+            } else {
+              done('failed')
+            }
+            return resp
+          })
+        })
+      }
+
+      // remove methods
+      // TODO: others?
+      tx.transaction = null
+      tx.suggest = null
+
+      return tx
     }
 
-    return params
-  }
+    /* utility functions */
 
-  function validateArgs (url, params, req) {
-    if (!(url instanceof URL)) throw new TypeError('bad url')
-    if (!(params instanceof URLSearchParams)) throw new TypeError('bad params')
-    if (typeof req !== 'object') throw new TypeError('bad request')
-  }
+    function toParams (arg) {
+      if (arg instanceof URLSearchParams) return arg
 
-  return MLRest
+      var params = new URLSearchParams()
+
+      if (arg && typeof arg === 'object') {
+        Object.keys(arg).forEach(function (key) {
+          var val = arg[key]
+
+          if (val == null) return
+
+          if (Array.isArray(val)) {
+            val.forEach(function (val) {
+              params.append(key, val)
+            })
+          } else {
+            params.set(key, val)
+          }
+        })
+      }
+
+      return params
+    }
+
+    function validateArgs (url, params, req) {
+      if (!(url instanceof URL)) throw new TypeError('bad url')
+      if (!(params instanceof URLSearchParams)) throw new TypeError('bad params')
+      if (typeof req !== 'object') throw new TypeError('bad request')
+    }
+
+    return MLRest
+  }
 }))

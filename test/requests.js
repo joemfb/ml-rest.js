@@ -1,9 +1,12 @@
 /* eslint-env mocha */
-/* global Headers URL URLSearchParams */
 'use strict'
 
 var expect = require('chai').expect
 var nock = require('nock')
+
+var URLSearchParams = require('url-search-params')
+var URL = require('whatwg-url').URL
+var Headers = require('node-fetch').Headers
 
 var lib, inst
 
@@ -20,7 +23,7 @@ function assertBasicResp (resp) {
 
 describe('construct/request', function () {
   before(function () {
-    lib = require('../index.js')
+    lib = require('../rest-node.js')
     inst = lib({ baseURI: 'http://example.com' })
   })
 

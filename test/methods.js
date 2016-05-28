@@ -21,7 +21,7 @@ function assertBasicResp (resp) {
 
 describe('methods', function () {
   before(function () {
-    lib = require('../index.js')
+    lib = require('..')
     inst = lib.create({ baseURI: 'http://example.com' })
   })
 

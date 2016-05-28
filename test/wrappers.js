@@ -19,7 +19,7 @@ function assertBasicResp (resp) {
 
 describe('wrappers:', function () {
   before(function () {
-    lib = require('../index.js')
+    lib = require('../rest-node.js')
     inst = lib({ baseURI: 'http://example.com' })
   })
 

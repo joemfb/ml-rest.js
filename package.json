@@ -2,7 +2,8 @@
   "name": "ml-rest.js",
   "version": "1.0.0-0",
   "description": "a lightweight JS client for the MarkLogic REST API",
-  "main": "index.js",
+  "main": "rest-node.js",
+  "browser": "rest-browser.js",
   "scripts": {
     "lint": "standard *.js **/*.js",
     "test": "istanbul cover _mocha"
@@ -10,8 +11,9 @@
   "author": "joemfb",
   "license": "Apache-2.0",
   "dependencies": {
-    "fetch-everywhere": "^1.0.2",
+    "node-fetch": "^1.5.3",
     "url-search-params": "^0.5.0",
+    "whatwg-fetch": "^1.0.0",
     "whatwg-url": "^2.0.1"
   },
   "devDependencies": {
