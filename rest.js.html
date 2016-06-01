@@ -162,11 +162,6 @@
      *
      * @class MLRest
      * @constructor MLRest
-     * @param {Object} [options]
-     * @prop {String} [options.endpoint&#x3D;&#x27;/&#x27;] - the REST API endpoint
-     * @prop {String} [options.version&#x3D;&#x27;v1&#x27;] - the REST API version
-     * @prop {String} [options.baseURI&#x3D;document.baseURI] - the base URI for REST API instance
-     * @prop {Object} [options.request] - default args for {@link deps.external:fetch}
      */
     function MLRest (options) {
       if (!(this instanceof MLRest)) {
@@ -191,7 +186,11 @@
      *
      * @static
      * @memberof MLRest
-     * @param {Object} [options] - see constructor options
+     * @param {Object} [options]
+     * @prop {String} [options.endpoint&#x3D;&#x27;/&#x27;] - the REST API endpoint
+     * @prop {String} [options.version&#x3D;&#x27;v1&#x27;] - the REST API version
+     * @prop {String} [options.baseURI&#x3D;document.baseURI] - the base URI for REST API instance
+     * @prop {Object} [options.request] - default args for {@link deps.external:fetch}
      * @return {MLRest}
      */
     MLRest.create &#x3D; function (options) {
