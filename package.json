@@ -1,6 +1,6 @@
 {
   "name": "ml-rest.js",
-  "version": "1.0.0-1",
+  "version": "1.0.0-2",
   "description": "a lightweight JS client for the MarkLogic REST API",
   "main": "rest-node.js",
   "browser": "rest-browser.js",
