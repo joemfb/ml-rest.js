@@ -1,0 +1,941 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 3.4.0">
+  <meta charset="utf-8">
+  <title>Source: rest.js</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">Home</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-banner" role="banner">
+        </div>
+        <div id="jsdoc-main" role="main">
+          <header class="page-header">
+            <h1>Source: rest.js</h1>
+          </header>
+          <article>
+            <pre class="prettyprint linenums"><code>/* global define */
+(function (self, factory) {
+  &#x27;use strict&#x27;
+
+  var g &#x3D; typeof global &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;amp;&amp;amp; global
+  if (g.global &#x3D;&#x3D;&#x3D; g || g.window &#x3D;&#x3D;&#x3D; g || g.self &#x3D;&#x3D;&#x3D; g) {
+    self &#x3D; g
+  }
+
+  if (typeof define &#x3D;&#x3D;&#x3D; &#x27;function&#x27; &amp;amp;&amp;amp; define.amd) {
+    define([], factory(self))
+  } else if (typeof module &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;amp;&amp;amp; typeof module.exports &#x3D;&#x3D;&#x3D; &#x27;object&#x27;) {
+    module.exports &#x3D; factory(self)
+  } else {
+    self.mlRestFactory &#x3D; factory(self)
+  }
+}(this, function (self) {
+  &#x27;use strict&#x27;
+
+  /**
+   * Provide dependencies to an MLRest factory/constructor
+   *
+   * @function mlRestFactory
+   * @param {Object} [deps]
+   * @prop {deps.external:fetch} [deps.fetch] - fetch polyfill
+   * @prop {deps.external:Headers} [deps.Headers] - Headers polyfill
+   * @prop {deps.external:Response} [deps.Response] - Response polyfill
+   * @prop {deps.external:URL} [deps.URL] - URL polyfill
+   * @prop {deps.external:URLSearchParams} [deps.URLSearchParams] - URLSearchParams polyfill
+   * @throws {TypeError} if required dependencies are missing
+   * @return {MLRest}
+   */
+  return function (deps) {
+    deps &#x3D; deps || {}
+
+    /** @namespace deps */
+
+    /**
+     * a function for making HTTP requests: see
+     * {@link https://developer.mozilla.org/en-US/docs/Web/API/GlobalFetch/fetch MDN}
+     * for details. polyfill&#x27;d with {@link https://github.com/github/fetch github/fetch}
+     * by default
+     *
+     * @memberof deps
+     * @external fetch
+     */
+    var fetch &#x3D; deps.fetch || self.fetch
+    if (typeof fetch !&#x3D;&#x3D; &#x27;function&#x27;) {
+      throw new TypeError(&#x27;missing dependency: fetch&#x27;)
+    }
+
+    /**
+     * an object for request Headers: see
+     * {@link https://developer.mozilla.org/en-US/docs/Web/API/Headers MDN}
+     * for details. polyfill&#x27;d with {@link https://github.com/github/fetch github/fetch}
+     * by default
+     *
+     * @memberof deps
+     * @external Headers
+     */
+    var Headers &#x3D; deps.Headers || self.Headers
+    if (typeof Headers !&#x3D;&#x3D; &#x27;function&#x27;) {
+      throw new TypeError(&#x27;missing dependency: Headers&#x27;)
+    }
+
+    /**
+     * an object for an HTTP response: see
+     * {@link https://developer.mozilla.org/en-US/docs/Web/API/Response MDN}
+     * for details. polyfill&#x27;d with {@link https://github.com/github/fetch github/fetch}
+     * by default
+     *
+     * @memberof deps
+     * @external Response
+     */
+    var Response &#x3D; deps.Response || self.Response
+    if (typeof Response !&#x3D;&#x3D; &#x27;function&#x27;) {
+      throw new TypeError(&#x27;missing dependency: Response&#x27;)
+    }
+
+    /**
+     * a constructor for URLs: see
+     * {@link https://developer.mozilla.org/en-US/docs/Web/API/URL MDN}
+     * for details. polyfill&#x27;d with {@link https://github.com/jsdom/whatwg-url jsdom/whatwg-url}
+     * by default
+     *
+     * @memberof deps
+     * @external URL
+     */
+    var URL &#x3D; deps.URL || self.URL
+    if (typeof URL !&#x3D;&#x3D; &#x27;function&#x27;) {
+      throw new TypeError(&#x27;missing dependency: URL&#x27;)
+    }
+
+    /**
+     * an object for encoding and serializing URL params: see
+     * {@link https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams MDN}
+     * for details. polyfill&#x27;d with
+     * {@link https://github.com/WebReflection/url-search-params WebReflection/url-search-params}
+     * by default
+     *
+     * @memberof deps
+     * @external URLSearchParams
+     */
+    var URLSearchParams &#x3D; deps.URLSearchParams || self.URLSearchParams
+    if (typeof URLSearchParams !&#x3D;&#x3D; &#x27;function&#x27;) {
+      throw new TypeError(&#x27;missing dependency: URLSearchParams&#x27;)
+    }
+
+    // TODO: replace Object.assign ?
+    // if (!&#x27;assign&#x27; in Object) {
+    //   throw new Error(&#x27;missing Object.assign&#x27;)
+    // }
+
+    /**
+     * the result of an asynchronous computation or request:
+     * {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise MDN}
+     * for details
+     *
+     * @memberof deps
+     * @external Promise
+     */
+    // TODO: pass-in / override Promise
+
+    // TODO: default CORS?
+    var requestOpts &#x3D; { credentials: &#x27;same-origin&#x27; }
+
+    /** @namespace MLRest */
+
+    /**
+     * Constructs an {@link MLRest} client
+     *
+     * @class MLRest
+     * @constructor MLRest
+     * @param {Object} [options]
+     * @prop {String} [options.endpoint&#x3D;&#x27;/&#x27;] - the REST API endpoint
+     * @prop {String} [options.version&#x3D;&#x27;v1&#x27;] - the REST API version
+     * @prop {String} [options.baseURI&#x3D;document.baseURI] - the base URI for REST API instance
+     * @prop {Object} [options.request] - default args for {@link deps.external:fetch}
+     */
+    function MLRest (options) {
+      if (!(this instanceof MLRest)) {
+        return new MLRest(options)
+      }
+
+      options &#x3D; options || {}
+
+      this.endpoint &#x3D; options.endpoint || &#x27;/&#x27;
+      this.version &#x3D; options.version || &#x27;v1&#x27;
+      this.baseURI &#x3D; options.baseURI || (document &amp;amp;&amp;amp; document.baseURI)
+
+      if (!this.baseURI) {
+        throw new TypeError(&#x27;missing base uri&#x27;)
+      }
+
+      this.requestOpts &#x3D; Object.assign({}, requestOpts, options.request)
+    }
+
+    /**
+     * Creates an {@link MLRest} client
+     *
+     * @static
+     * @memberof MLRest
+     * @param {Object} [options] - see constructor options
+     * @return {MLRest}
+     */
+    MLRest.create &#x3D; function (options) {
+      return new MLRest(options)
+    }
+
+    /**
+     * Returns an {@link deps.external:Promise} resolved with an {@link deps.external:Response}
+     * @typedef &quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;
+     */
+
+    MLRest.prototype._request &#x3D; function (url, params, req) {
+      validateArgs(url, params, req)
+      url.search &#x3D; params
+      return fetch(url.toString(), req)
+    }
+
+    /**
+     * Make an arbitrary REST request
+     *
+     * @method
+     * @memberof MLRest
+     * @param {String} endpoint
+     * @param {Object|deps.external:URLSearchParams} [params]
+     * @param {Object} [req]
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.request &#x3D; function (endpoint, params, req) {
+      req &#x3D; Object.assign({}, this.requestOpts, req)
+
+      if (!req.headers) {
+        req.headers &#x3D; new Headers()
+      } else if (!(req.headers instanceof Headers)) {
+        req.headers &#x3D; new Headers(req.headers)
+      }
+
+      if (!req.headers.has(&#x27;Accept&#x27;)) {
+        req.headers.set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+      }
+      if (!req.headers.has(&#x27;Content-Type&#x27;)) {
+        req.headers.set(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;)
+      }
+
+      var relativeURL
+
+      if (/^\/v1\//.test(endpoint)) {
+        // TODO: include this.endpoint ?
+        relativeURL &#x3D; endpoint
+      } else {
+        relativeURL &#x3D; this.endpoint + this.version + (/^\//.test(endpoint) ? &#x27;&#x27; : &#x27;/&#x27;) + endpoint
+      }
+
+      var url &#x3D; new URL(relativeURL, this.baseURI)
+
+      return this._request(url, toParams(params), req)
+    }
+
+    /**
+     * Search for documents or metadata
+     * @see http://docs.marklogic.com/REST/POST/v1/search
+     *
+     * @method
+     * @memberof MLRest
+     * @param {Object} [query] - a combined query
+     * @param {Object|deps.external:URLSearchParams} [params] - request params
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.search &#x3D; function (query, params) {
+      if (!params &amp;amp;&amp;amp; query &amp;amp;&amp;amp; !query.search) {
+        params &#x3D; query
+        query &#x3D; null
+      }
+
+      return this.request(&#x27;/search&#x27;, params, {
+        method: &#x27;POST&#x27;,
+        body: JSON.stringify(query)
+      })
+    }
+
+    // TODO:
+    MLRest.prototype.qbe &#x3D; function (query, params) {
+      throw new Error(&#x27;unimplemented&#x27;)
+    }
+
+    /**
+     * Get search phrase suggestions (for autocompletion)
+     * @see http://docs.marklogic.com/REST/POST/v1/suggest
+     *
+     * @method
+     * @memberof MLRest
+     * @param {String} [prefix] - search phrase to match
+     * @param {Object} [query] - a combined query
+     * @param {Object|deps.external:URLSearchParams} [params] - request params
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.suggest &#x3D; function (prefix, query, params) {
+      if (!params &amp;amp;&amp;amp; query &amp;amp;&amp;amp; !query.search) {
+        params &#x3D; query
+        query &#x3D; null
+      }
+
+      params &#x3D; toParams(params)
+
+      if (prefix) {
+        params.set(&#x27;partial-q&#x27;, prefix)
+      }
+
+      return this.request(&#x27;/suggest&#x27;, params, {
+        method: &#x27;POST&#x27;,
+        body: JSON.stringify(query)
+      })
+    }
+
+    /**
+     * List the server-side values definitions
+     * @see http://docs.marklogic.com/REST/GET/v1/values
+     *
+     * @method
+     * @memberof MLRest
+     * @param {Object|deps.external:URLSearchParams} [params] - request params
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.listValues &#x3D; function (params) {
+      return this.request(&#x27;/values&#x27;, params)
+    }
+
+    /**
+     * Get values for the named definition
+     * @see http://docs.marklogic.com/REST/POST/v1/values/[name]
+     *
+     * @method
+     * @memberof MLRest
+     * @param {String} name - values definition name
+     * @param {Object} [query] - a combined query
+     * @param {Object|deps.external:URLSearchParams} [params] - request params
+     * @throws {TypeError} if name is not provided
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.values &#x3D; function (name, query, params) {
+      if (typeof name !&#x3D;&#x3D; &#x27;string&#x27;) {
+        throw new TypeError(&#x27;missing values definition name&#x27;)
+      }
+
+      if (!params &amp;amp;&amp;amp; query &amp;amp;&amp;amp; !query.search) {
+        params &#x3D; query
+        query &#x3D; null
+      }
+
+      return this.request(&#x27;/values/&#x27; + name, params, {
+        method: &#x27;POST&#x27;,
+        body: JSON.stringify(query)
+      })
+    }
+
+    /**
+     * Get a document
+     * @see http://docs.marklogic.com/REST/GET/v1/documents
+     *
+     * @method
+     * @memberof MLRest
+     * @param {String} uri - document URI
+     * @param {Object|deps.external:URLSearchParams} [params] - request params
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.doc &#x3D; function (uri, params) {
+      if (typeof uri !&#x3D;&#x3D; &#x27;string&#x27;) {
+        throw new TypeError(&#x27;missing document URI&#x27;)
+      }
+
+      params &#x3D; toParams(params)
+      params.set(&#x27;uri&#x27;, uri)
+
+      return this.request(&#x27;/documents&#x27;, params)
+    }
+
+    /**
+     * Create a document
+     * @see http://docs.marklogic.com/REST/PUT/v1/documents
+     * @see http://docs.marklogic.com/REST/POST/v1/documents
+     * @see http://docs.marklogic.com/REST/POST/v1/documents@extension&#x3D;[ext]
+     *
+     * @method
+     * @memberof MLRest
+     * @param {String} [uri] - document URI (generated server-side if not present)
+     * @param content - document content
+     * @param {Object|deps.external:URLSearchParams} [params] - request params
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.create &#x3D; function (uri, content, params) {
+      var method
+
+      // TODO: support string docs as well
+      // !&#x3D;&#x3D; &#x27;string&#x27; and check arguments.length?
+      if (typeof uri &#x3D;&#x3D;&#x3D; &#x27;object&#x27;) {
+        params &#x3D; content
+        content &#x3D; uri
+        uri &#x3D; null
+        method &#x3D; &#x27;POST&#x27;
+      } else {
+        method &#x3D; &#x27;PUT&#x27;
+      }
+
+      params &#x3D; toParams(params)
+
+      if (uri) {
+        params.set(&#x27;uri&#x27;, uri)
+      }
+
+      return this.request(&#x27;/documents&#x27;, params, {
+        method: method,
+        body: JSON.stringify(content)
+      })
+    }
+
+    /**
+     * Update a document
+     * @see http://docs.marklogic.com/REST/PUT/v1/documents
+     *
+     * @method
+     * @memberof MLRest
+     * @param {String} uri - document URI
+     * @param {Object} content - updated document contents
+     * @param {Object|deps.external:URLSearchParams} [params] - request params
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.update &#x3D; function (uri, content, params) {
+      if (typeof uri !&#x3D;&#x3D; &#x27;string&#x27;) {
+        throw new TypeError(&#x27;missing document URI&#x27;)
+      }
+
+      params &#x3D; toParams(params)
+      params.set(&#x27;uri&#x27;, uri)
+
+      return this.request(&#x27;/documents&#x27;, params, {
+        method: &#x27;PUT&#x27;,
+        body: JSON.stringify(content)
+      })
+    }
+
+    /**
+     * Delete a document
+     * @see http://docs.marklogic.com/REST/DELETE/v1/documents
+     *
+     * @method
+     * @memberof MLRest
+     * @param {String} uri
+     * @param {Object|deps.external:URLSearchParams} [params]
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.delete &#x3D; function (uri, params) {
+      if (typeof uri !&#x3D;&#x3D; &#x27;string&#x27;) {
+        throw new TypeError(&#x27;missing document URI&#x27;)
+      }
+
+      params &#x3D; toParams(params)
+      params.set(&#x27;uri&#x27;, uri)
+
+      return this.request(&#x27;/documents&#x27;, params, {
+        method: &#x27;DELETE&#x27;
+      })
+    }
+
+    /**
+     * Delete multiple documents by URI, directory, or collection
+     * @see http://docs.marklogic.com/REST/DELETE/v1/documents
+     * @see http://docs.marklogic.com/REST/DELETE/v1/search
+     *
+     * @method
+     * @memberof MLRest
+     * @param {Array&amp;lt;String&gt;} [uris] - document URIs
+     * @param {Object|deps.external:URLSearchParams} [params] - request params
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.deleteAll &#x3D; function (uris, params) {
+      // TODO: every is string ...
+      if (Array.isArray(uris)) {
+        params &#x3D; toParams(params)
+
+        uris.forEach(function (uri) {
+          params.append(&#x27;uri&#x27;, uri)
+        })
+
+        return this.request(&#x27;/documents&#x27;, params, {
+          method: &#x27;DELETE&#x27;
+        })
+      }
+
+      if (!arguments.length || (!params &amp;amp;&amp;amp; uris &amp;amp;&amp;amp; typeof uris &#x3D;&#x3D;&#x3D; &#x27;object&#x27;)) {
+        return this.request(&#x27;/search&#x27;, toParams(uris), {
+          method: &#x27;DELETE&#x27;
+        })
+      }
+
+      throw new TypeError(&#x27;bad args&#x27;)
+    }
+
+    // TODO:
+    MLRest.prototype.patch &#x3D; function (uri, patch, params) {
+      throw new Error(&#x27;unimplemented&#x27;)
+    }
+
+    /**
+     * List all semantic graphs by name
+     * @see http://docs.marklogic.com/REST/GET/v1/graphs
+     *
+     * @method
+     * @memberof MLRest
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.listGraphs &#x3D; function () {
+      return this.request(&#x27;/graphs&#x27;, null, {
+        method: &#x27;GET&#x27;,
+        headers: { Accept: &#x27;text/uri-list&#x27; }
+      })
+      .then(function (resp) {
+        if (!resp.ok) return resp
+
+        return resp.text().then(function (txt) {
+          var data &#x3D; txt.split(/\n/).filter(function (line) {
+            return line.length
+          })
+
+          // note: this doesn&#x27;t set URL
+          return new Response(JSON.stringify(data), resp)
+        })
+      })
+    }
+
+    // TODO: debug
+
+    /**
+     * Get the contents of a specified graph, or the default graph
+     * @see http://docs.marklogic.com/REST/GET/v1/graphs
+     *
+     * @method
+     * @memberof MLRest
+     * @param {String} [uri] - graph URI
+     * @param {Object|deps.external:URLSearchParams} [params] - request params
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.graph &#x3D; function (uri, params) {
+      if (!arguments.length || !params &amp;amp;&amp;amp; typeof uri &#x3D;&#x3D;&#x3D; &#x27;object&#x27;) {
+        params &#x3D; uri
+        uri &#x3D; null
+      }
+
+      params &#x3D; toParams(params)
+
+      if (uri) {
+        params.set(&#x27;graph&#x27;, uri)
+      } else {
+        params.set(&#x27;default&#x27;, &#x27;&#x27;)
+      }
+
+      return this.request(&#x27;/graphs&#x27;, params, {
+        method: &#x27;GET&#x27;,
+        headers: { &#x27;Accept&#x27;: &#x27;application/rdf+json&#x27; }
+      })
+    }
+
+    // TODO: IRIs is optional!
+
+    /**
+     * Get triples related to the specified IRIs
+     * @see http://docs.marklogic.com/REST/GET/v1/graphs/things
+     *
+     * @method
+     * @memberof MLRest
+     * @param {String|Array&amp;lt;String&gt;} iris - one-or-more IRIs
+     * @param {Object|deps.external:URLSearchParams} [params] - request params
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.things &#x3D; function (iris, params) {
+      params &#x3D; toParams(params)
+
+      if (typeof iris &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+        params.set(&#x27;iri&#x27;, iris)
+        // TODO: every is string
+      } else if (Array.isArray(iris)) {
+        iris.forEach(function (iri) {
+          params.append(&#x27;iri&#x27;, iri)
+        })
+      } else {
+        throw new TypeError(&#x27;bad args&#x27;)
+      }
+
+      return this.request(&#x27;/graphs/things&#x27;, params, {
+        method: &#x27;GET&#x27;,
+        headers: { &#x27;Accept&#x27;: &#x27;application/rdf+json&#x27; }
+      })
+    }
+
+    // TODO: create/delete triples/graph
+
+    // TODO:
+    MLRest.prototype.sparql &#x3D; function (query) {
+      throw new Error(&#x27;unimplemented&#x27;)
+    }
+
+    // TODO: separate sparqlUpdate method?
+
+    /**
+     * List the server-side query options
+     * @see http://docs.marklogic.com/REST/GET/v1/config/query
+     *
+     * @method
+     * @memberof MLRest
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.listOptions &#x3D; function () {
+      return this.request(&#x27;/config/query&#x27;)
+    }
+
+    // TODO: support default
+
+    /**
+     * Get server-side options by name
+     * @see http://docs.marklogic.com/REST/GET/v1/config/query/[&#x27;default&#x27;-or-name]
+     *
+     * @method
+     * @memberof MLRest
+     * @param {String} name
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.options &#x3D; function (name) {
+      if (typeof name !&#x3D;&#x3D; &#x27;string&#x27;) {
+        throw new TypeError(&#x27;missing name&#x27;)
+      }
+      return this.request(&#x27;/config/query/&#x27; + name)
+    }
+
+    // TODO:
+    MLRest.prototype.extension &#x3D; function (name, params) {
+      throw new Error(&#x27;unimplemented&#x27;)
+    }
+    MLRest.prototype.eval &#x3D; function (code, params) {
+      throw new Error(&#x27;unimplemented&#x27;)
+    }
+    MLRest.prototype.invoke &#x3D; function (uri, params) {
+      throw new Error(&#x27;unimplemented&#x27;)
+    }
+
+    /**
+     * An instance of {@link MLRest} bound to a named database
+     *
+     * @memberof MLRest
+     * @namespace Database
+     */
+
+    /**
+     * Creates a {@link Database} instance with the same settings as &#x60;this&#x60;,
+     * throws an Error &#x60;this&#x60; is a Database
+     *
+     * @method
+     * @memberof MLRest
+     * @param {String} name
+     * @returns {Database}
+     */
+    MLRest.prototype.database &#x3D; function (name) {
+      if (typeof name !&#x3D;&#x3D; &#x27;string&#x27;) {
+        throw new TypeError(&#x27;missing database name&#x27;)
+      }
+
+      var db &#x3D; new MLRest(this)
+
+      db._request &#x3D; function (url, params, req) {
+        validateArgs(url, params, req)
+        params.set(&#x27;database&#x27;, name)
+        url.search &#x3D; params
+        return fetch(url.toString(), req)
+      }
+
+      // TODO: replace with error-throwing fn
+      db.database &#x3D; null
+
+      return db
+    }
+
+    /**
+     * Open a multi-statement transaction
+     * @see http://docs.marklogic.com/REST/POST/v1/transactions
+     *
+     * @method
+     * @memberof MLRest
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    // TODO: name, params
+    MLRest.prototype.openTransaction &#x3D; function () {
+      return this.request(&#x27;/transactions&#x27;, null, { method: &#x27;POST&#x27; })
+    }
+
+    /**
+     * Get the details of an open transaction
+     * @see http://docs.marklogic.com/REST/GET/v1/transactions/[txid]
+     *
+     * @method
+     * @memberof MLRest
+     * @param {String} txId - transaction ID
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.transactionDetails &#x3D; function (txId) {
+      if (typeof txId !&#x3D;&#x3D; &#x27;string&#x27;) {
+        throw new TypeError(&#x27;missing transaction id&#x27;)
+      }
+      return this.request(&#x27;/transactions/&#x27; + txId)
+    }
+
+    /**
+     * Commit a multi-statement transaction
+     * @see http://docs.marklogic.com/REST/POST/v1/transactions/[txid]
+     *
+     * @method
+     * @memberof MLRest
+     * @param {String} txId - transaction ID
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.commitTransaction &#x3D; function (txId) {
+      if (typeof txId !&#x3D;&#x3D; &#x27;string&#x27;) {
+        throw new TypeError(&#x27;missing transaction id&#x27;)
+      }
+      return this.request(&#x27;/transactions/&#x27; + txId, { result: &#x27;commit&#x27; }, {
+        method: &#x27;POST&#x27;
+      })
+    }
+
+    /**
+     * Rollback a multi-statement transaction
+     * @see http://docs.marklogic.com/REST/POST/v1/transactions/[txid]
+     *
+     * @method
+     * @memberof MLRest
+     * @param {String} txId - transaction ID
+     * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+     */
+    MLRest.prototype.rollbackTransaction &#x3D; function (txId) {
+      if (typeof txId !&#x3D;&#x3D; &#x27;string&#x27;) {
+        throw new TypeError(&#x27;missing transaction id&#x27;)
+      }
+      return this.request(&#x27;/transactions/&#x27; + txId, { result: &#x27;rollback&#x27; }, {
+        method: &#x27;POST&#x27;
+      })
+    }
+
+    /**
+     * An instance of {@link MLRest} representing a multi-statement transaction,
+     * adds all subsequent requests to the transaction. Once committed or rolled-back,
+     * all methods throw an Error.
+     *
+     * &amp;lt;p&gt;supports all {@link MLRest} methods except {@link MLRest#transaction}
+     * and {@link MLRest#suggest}&amp;lt;/p&gt;
+     *
+     * @memberof MLRest
+     * @namespace Transaction
+     * @prop {String} status - one of &#x60;[&#x27;uninitialized&#x27;, &#x27;failed&#x27;, &#x27;open&#x27;, &#x27;committed&#x27;, &#x27;rolled-back&#x27;]&#x60;
+     */
+
+    /**
+     * Creates a {@link Transaction} instance with the same settings as &#x60;this&#x60;,
+     * throws an Error if &#x60;this&#x60; is a Transaction
+     *
+     * @method
+     * @memberof MLRest
+     * @returns {Transaction}
+     */
+    // TODO: name, params
+    MLRest.prototype.transaction &#x3D; function () {
+      var self &#x3D; this
+      var tx &#x3D; new MLRest(self)
+      var txId &#x3D; null
+
+      tx.status &#x3D; &#x27;uninitialized&#x27;
+
+      function done (status) {
+        tx.status &#x3D; status
+        txId &#x3D; null
+
+        function closed () {
+          throw new Error(&#x27;transaction closed: &#x27; + status)
+        }
+
+        tx.details &#x3D; closed
+        tx.commit &#x3D; closed
+        tx.rollback &#x3D; closed
+        tx._request &#x3D; closed
+        // txPromise &#x3D; Promise.reject()
+      }
+
+      // open new transaction
+      var txPromise &#x3D; self.openTransaction()
+      .then(function (resp) {
+        if (!resp.ok) throw new Error(&#x27;bad response&#x27;)
+
+        return resp.json()
+      })
+      .then(function (details) {
+        tx.status &#x3D; &#x27;open&#x27;
+        txId &#x3D; details &amp;amp;&amp;amp; details[&#x27;transaction-status&#x27;] &amp;amp;&amp;amp;
+               details[&#x27;transaction-status&#x27;][&#x27;transaction-id&#x27;]
+
+        if (!txId) throw new TypeError(&#x27;unknown structure&#x27;)
+      })
+      .catch(function (err) {
+        done(&#x27;failed&#x27;)
+        throw new Error(err)
+      })
+
+      tx._request &#x3D; function (url, params, req) {
+        validateArgs(url, params, req)
+        // block requests until transaction is opened
+        return txPromise.then(function () {
+          params.set(&#x27;txid&#x27;, txId)
+          url.search &#x3D; params
+          return fetch(url.toString(), req)
+        })
+      }
+
+      // add tx methods
+
+      /**
+       * Get transaction details
+       * @see MLRest#transactionDetails
+       *
+       * @function details
+       * @memberof Transaction
+       * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+       */
+      tx.details &#x3D; function () {
+        return txPromise.then(function () {
+          return self.transactionDetails(txId)
+        })
+      }
+
+      // TODO: collect all _request promises and
+      // await them all before commit/rollback?
+
+      /**
+       * Commit this transaction
+       * @see MLRest#commitTransaction
+       *
+       * @function commit
+       * @memberof Transaction
+       * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+       */
+      tx.commit &#x3D; function () {
+        return txPromise.then(function () {
+          return self.commitTransaction(txId)
+          .then(function (resp) {
+            if (resp.ok) {
+              done(&#x27;committed&#x27;)
+            } else {
+              done(&#x27;failed&#x27;)
+            }
+            return resp
+          })
+        })
+      }
+
+      /**
+       * Rollback this transaction
+       * @see MLRest#rollbackTransaction
+       *
+       * @function rollback
+       * @memberof Transaction
+       * @returns {&quot;Promise&amp;amp;lt;Response&amp;amp;gt;&quot;}
+       */
+      tx.rollback &#x3D; function () {
+        return txPromise.then(function () {
+          return self.rollbackTransaction(txId)
+          .then(function (resp) {
+            if (resp.ok) {
+              done(&#x27;rolled-back&#x27;)
+            } else {
+              done(&#x27;failed&#x27;)
+            }
+            return resp
+          })
+        })
+      }
+
+      // remove methods
+      // TODO: others?
+      // TODO: replace with error-throwing fn
+      tx.transaction &#x3D; null
+      tx.suggest &#x3D; null
+
+      return tx
+    }
+
+    /* utility functions */
+
+    function toParams (arg) {
+      if (arg instanceof URLSearchParams) return arg
+
+      var params &#x3D; new URLSearchParams()
+
+      if (arg &amp;amp;&amp;amp; typeof arg &#x3D;&#x3D;&#x3D; &#x27;object&#x27;) {
+        Object.keys(arg).forEach(function (key) {
+          var val &#x3D; arg[key]
+
+          if (val &#x3D;&#x3D; null) return
+
+          if (Array.isArray(val)) {
+            val.forEach(function (val) {
+              params.append(key, val)
+            })
+          } else {
+            params.set(key, val)
+          }
+        })
+      }
+
+      return params
+    }
+
+    function validateArgs (url, params, req) {
+      if (!(url instanceof URL)) throw new TypeError(&#x27;bad url&#x27;)
+      if (!(params instanceof URLSearchParams)) throw new TypeError(&#x27;bad params&#x27;)
+      if (typeof req !&#x3D;&#x3D; &#x27;object&#x27;) throw new TypeError(&#x27;bad request&#x27;)
+    }
+
+    return MLRest
+  }
+}))
+</code></pre>
+          </article>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 3.4.0 on June 1, 2016.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/jquery.cookie.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>

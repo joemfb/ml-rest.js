@@ -1,0 +1,1131 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 3.4.0">
+  <meta charset="utf-8">
+  <title>Namespace: MLRest</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">Home</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-main" role="main">
+          <header class="page-header">
+            <div class="symbol-detail-labels"><span class="label label-kind">namespace</span></div>
+            <h1><small></small><span class="symbol-name">MLRest</span></h1>
+            <p class="source-link">Source: <a href="rest.js.html#source-line-127">rest.<wbr>js:127</a></p>
+            <div class="symbol-description">
+            </div>
+            <dl class="dl-compact">
+            </dl>
+          </header>
+          <section id="summary">
+            <div class="summary-callout">
+              <h2 class="summary-callout-heading">Namespaces</h2>
+              <div class="summary-content">
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="MLRest.Database.html">Database</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="MLRest.Transaction.html">Transaction</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="summary-column">
+                </div>
+              </div>
+            </div>
+            <div class="summary-callout">
+              <h2 class="summary-callout-heading">Methods</h2>
+              <div class="summary-content">
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="MLRest.html#.create">create([options])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#commitTransaction">commitTransaction(txId)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#create">create([uri], content[, params])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#database">database(name)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#delete">delete(uri[, params])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#deleteAll">deleteAll([uris][, params])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#doc">doc(uri[, params])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#graph">graph([uri][, params])</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="MLRest.html#listGraphs">listGraphs()</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#listOptions">listOptions()</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#listValues">listValues([params])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#openTransaction">openTransaction()</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#options">options(name)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#request">request(endpoint[, params][, req])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#rollbackTransaction">rollbackTransaction(txId)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#search">search([query][, params])</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="summary-column">
+                  <dl class="dl-summary-callout">
+                    <dt><a href="MLRest.html#suggest">suggest([prefix][, query][, params])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#things">things(iris[, params])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#transaction">transaction()</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#transactionDetails">transactionDetails(txId)</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#update">update(uri, content[, params])</a></dt>
+                    <dd>
+                    </dd>
+                    <dt><a href="MLRest.html#values">values(name[, query][, params])</a></dt>
+                    <dd>
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <h2>Namespaces</h2>
+            <section id='members-links'>
+              <h3><a href="MLRest.Database.html">Database</a></h3>
+              <h3><a href="MLRest.Transaction.html">Transaction</a></h3>
+            </section>
+            <h2>Methods</h2>
+            <section>
+              <div class="symbol-detail-labels"><span class="label label-static">static</span></div>
+              <h3 id=".create"><span class="symbol-name">create</span><span class="signature"><span class="signature-params">([options])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="MLRest.html">MLRest</a></span></span></h3>
+              <p>Creates an <a href="MLRest.html">MLRest</a> client</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>options</p>
+                      </td>
+                      <td>
+                        <p>Object</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>see constructor options</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="MLRest.html">MLRest</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="commitTransaction"><span class="symbol-name">commitTransaction</span><span class="signature"><span class="signature-params">(txId)</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Commit a multi-statement transaction</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>txId</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>transaction ID</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/POST/v1/transactions/%5Btxid%5D">http://docs.marklogic.com/REST/POST/v1/transactions/[txid]</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="create"><span class="symbol-name">create</span><span class="signature"><span class="signature-params">([uri], content[, params])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Create a document</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>uri</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>document URI (generated server-side if not present)</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>content</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>document content</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>params</p>
+                      </td>
+                      <td>
+                        <p>(Object or <a href="deps.external_URLSearchParams.html">deps.external:URLSearchParams</a>)</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>request params</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/PUT/v1/documents">http://docs.marklogic.com/REST/PUT/v1/documents</a></dd>
+                <dd><a href="http://docs.marklogic.com/REST/POST/v1/documents">http://docs.marklogic.com/REST/POST/v1/documents</a></dd>
+                <dd><a href="http://docs.marklogic.com/REST/POST/v1/documents@extension=%5Bext%5D">http://docs.marklogic.com/REST/POST/v1/documents@extension=[ext]</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="database"><span class="symbol-name">database</span><span class="signature"><span class="signature-params">(name)</span>&nbsp;&rarr; <span class="signature-returns"> Database</span></span></h3>
+              <p>Creates a Database instance with the same settings as <code>this</code>, throws an Error <code>this</code> is a Database</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>name</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code>Database</code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="delete"><span class="symbol-name">delete</span><span class="signature"><span class="signature-params">(uri[, params])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Delete a document</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>uri</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>params</p>
+                      </td>
+                      <td>
+                        <p>(Object or <a href="deps.external_URLSearchParams.html">deps.external:URLSearchParams</a>)</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/DELETE/v1/documents">http://docs.marklogic.com/REST/DELETE/v1/documents</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="deleteAll"><span class="symbol-name">deleteAll</span><span class="signature"><span class="signature-params">([uris][, params])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Delete multiple documents by URI, directory, or collection</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>uris</p>
+                      </td>
+                      <td>
+                        <p>Array of String</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>document URIs</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>params</p>
+                      </td>
+                      <td>
+                        <p>(Object or <a href="deps.external_URLSearchParams.html">deps.external:URLSearchParams</a>)</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>request params</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/DELETE/v1/documents">http://docs.marklogic.com/REST/DELETE/v1/documents</a></dd>
+                <dd><a href="http://docs.marklogic.com/REST/DELETE/v1/search">http://docs.marklogic.com/REST/DELETE/v1/search</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="doc"><span class="symbol-name">doc</span><span class="signature"><span class="signature-params">(uri[, params])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Get a document</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>uri</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>document URI</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>params</p>
+                      </td>
+                      <td>
+                        <p>(Object or <a href="deps.external_URLSearchParams.html">deps.external:URLSearchParams</a>)</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>request params</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/GET/v1/documents">http://docs.marklogic.com/REST/GET/v1/documents</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="graph"><span class="symbol-name">graph</span><span class="signature"><span class="signature-params">([uri][, params])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Get the contents of a specified graph, or the default graph</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>uri</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>graph URI</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>params</p>
+                      </td>
+                      <td>
+                        <p>(Object or <a href="deps.external_URLSearchParams.html">deps.external:URLSearchParams</a>)</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>request params</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/GET/v1/graphs">http://docs.marklogic.com/REST/GET/v1/graphs</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="listGraphs"><span class="symbol-name">listGraphs</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>List all semantic graphs by name</p>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/GET/v1/graphs">http://docs.marklogic.com/REST/GET/v1/graphs</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="listOptions"><span class="symbol-name">listOptions</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>List the server-side query options</p>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/GET/v1/config/query">http://docs.marklogic.com/REST/GET/v1/config/query</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="listValues"><span class="symbol-name">listValues</span><span class="signature"><span class="signature-params">([params])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>List the server-side values definitions</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>params</p>
+                      </td>
+                      <td>
+                        <p>(Object or <a href="deps.external_URLSearchParams.html">deps.external:URLSearchParams</a>)</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>request params</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/GET/v1/values">http://docs.marklogic.com/REST/GET/v1/values</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="openTransaction"><span class="symbol-name">openTransaction</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Open a multi-statement transaction</p>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/POST/v1/transactions">http://docs.marklogic.com/REST/POST/v1/transactions</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="options"><span class="symbol-name">options</span><span class="signature"><span class="signature-params">(name)</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Get server-side options by name</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>name</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/GET/v1/config/query/%5B'default'-or-name%5D">http://docs.marklogic.com/REST/GET/v1/config/query/['default'-or-name]</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="request"><span class="symbol-name">request</span><span class="signature"><span class="signature-params">(endpoint[, params][, req])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Make an arbitrary REST request</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>endpoint</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>params</p>
+                      </td>
+                      <td>
+                        <p>(Object or <a href="deps.external_URLSearchParams.html">deps.external:URLSearchParams</a>)</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>req</p>
+                      </td>
+                      <td>
+                        <p>Object</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="rollbackTransaction"><span class="symbol-name">rollbackTransaction</span><span class="signature"><span class="signature-params">(txId)</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Rollback a multi-statement transaction</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>txId</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>transaction ID</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/POST/v1/transactions/%5Btxid%5D">http://docs.marklogic.com/REST/POST/v1/transactions/[txid]</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="search"><span class="symbol-name">search</span><span class="signature"><span class="signature-params">([query][, params])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Search for documents or metadata</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>query</p>
+                      </td>
+                      <td>
+                        <p>Object</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>a combined query</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>params</p>
+                      </td>
+                      <td>
+                        <p>(Object or <a href="deps.external_URLSearchParams.html">deps.external:URLSearchParams</a>)</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>request params</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/POST/v1/search">http://docs.marklogic.com/REST/POST/v1/search</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="suggest"><span class="symbol-name">suggest</span><span class="signature"><span class="signature-params">([prefix][, query][, params])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Get search phrase suggestions (for autocompletion)</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>prefix</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>search phrase to match</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>query</p>
+                      </td>
+                      <td>
+                        <p>Object</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>a combined query</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>params</p>
+                      </td>
+                      <td>
+                        <p>(Object or <a href="deps.external_URLSearchParams.html">deps.external:URLSearchParams</a>)</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>request params</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/POST/v1/suggest">http://docs.marklogic.com/REST/POST/v1/suggest</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="things"><span class="symbol-name">things</span><span class="signature"><span class="signature-params">(iris[, params])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Get triples related to the specified IRIs</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>iris</p>
+                      </td>
+                      <td>
+                        <p>(String or Array of String)</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>one-or-more IRIs</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>params</p>
+                      </td>
+                      <td>
+                        <p>(Object or <a href="deps.external_URLSearchParams.html">deps.external:URLSearchParams</a>)</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>request params</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/GET/v1/graphs/things">http://docs.marklogic.com/REST/GET/v1/graphs/things</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="transaction"><span class="symbol-name">transaction</span><span class="signature"><span class="signature-params">()</span>&nbsp;&rarr; <span class="signature-returns"> <a href="Transaction.html">Transaction</a></span></span></h3>
+              <p>Creates a <a href="Transaction.html">Transaction</a> instance with the same settings as <code>this</code>, throws an Error if <code>this</code> is a Transaction</p>
+              <dl class="dl-compact">
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="Transaction.html">Transaction</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="transactionDetails"><span class="symbol-name">transactionDetails</span><span class="signature"><span class="signature-params">(txId)</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Get the details of an open transaction</p>
+              <section>
+                <h4>Parameter</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>txId</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>transaction ID</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/GET/v1/transactions/%5Btxid%5D">http://docs.marklogic.com/REST/GET/v1/transactions/[txid]</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="update"><span class="symbol-name">update</span><span class="signature"><span class="signature-params">(uri, content[, params])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Update a document</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>uri</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>document URI</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>content</p>
+                      </td>
+                      <td>
+                        <p>Object</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>updated document contents</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>params</p>
+                      </td>
+                      <td>
+                        <p>(Object or <a href="deps.external_URLSearchParams.html">deps.external:URLSearchParams</a>)</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>request params</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/PUT/v1/documents">http://docs.marklogic.com/REST/PUT/v1/documents</a></dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+              <h3 id="values"><span class="symbol-name">values</span><span class="signature"><span class="signature-params">(name[, query][, params])</span>&nbsp;&rarr; <span class="signature-returns"> <a href="global.html#%22Promise&lt;Response&gt;%22">"Promise&lt;Response&gt;"</a></span></span></h3>
+              <p>Get values for the named definition</p>
+              <section>
+                <h4>Parameters</h4>
+                <table class="jsdoc-details-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Type</th>
+                      <th>Optional</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p>name</p>
+                      </td>
+                      <td>
+                        <p>String</p>
+                      </td>
+                      <td>
+                        <p>&nbsp;</p>
+                      </td>
+                      <td>
+                        <p>values definition name</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>query</p>
+                      </td>
+                      <td>
+                        <p>Object</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>a combined query</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>params</p>
+                      </td>
+                      <td>
+                        <p>(Object or <a href="deps.external_URLSearchParams.html">deps.external:URLSearchParams</a>)</p>
+                      </td>
+                      <td>
+                        <p>Yes</p>
+                      </td>
+                      <td>
+                        <p>request params</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <dl class="dl-compact">
+                <dt>See also</dt>
+                <dd><a href="http://docs.marklogic.com/REST/POST/v1/values/%5Bname%5D">http://docs.marklogic.com/REST/POST/v1/values/[name]</a></dd>
+                <dt>Throws</dt>
+                <dd>
+                  <p><code>TypeError</code>&nbsp;if name is not provided</p>
+                </dd>
+                <dt>Returns</dt>
+                <dd>
+                  <p><code><a href="global.html#%22Promise&lt;Response&gt;%22">&quot;Promise&lt;Response&gt;&quot;</a></code>&nbsp;</p>
+                </dd>
+              </dl>
+            </section>
+          </section>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 3.4.0 on June 1, 2016.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/jquery.cookie.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>

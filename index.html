@@ -1,0 +1,338 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="generator" content="JSDoc 3.4.0">
+  <meta charset="utf-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Karla:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Noto+Serif:400,400i,700,700i" type="text/css">
+  <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Inconsolata:500" type="text/css">
+  <link href="css/baseline.css" rel="stylesheet">
+</head>
+
+<body onload="prettyPrint()">
+  <nav id="jsdoc-navbar" role="navigation" class="jsdoc-navbar">
+    <div id="jsdoc-navbar-container">
+      <div id="jsdoc-navbar-content">
+        <a href="index.html" class="jsdoc-navbar-package-name">Home</a>
+      </div>
+    </div>
+  </nav>
+  <div id="jsdoc-body-container">
+    <div id="jsdoc-content">
+      <div id="jsdoc-content-container">
+        <div id="jsdoc-banner" role="banner">
+        </div>
+        <div id="jsdoc-main" role="main">
+          <article>
+            <h3>ml-rest.js</h3>
+            <p>a lightweight JS client for the MarkLogic REST API, built on modern browser APIs <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"><code>fetch</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams"><code>URLSearchParams</code></a>.</p>
+            <p>install from npm</p>
+            <pre class="prettyprint source lang-sh"><code>npm install ml-rest.js</code></pre>
+            <p>By default, any missing dependencies are polyfilled for node and the browser:</p>
+            <pre class="prettyprint source lang-js"><code>var MLRest = require('ml-rest.js')
+var client = MLRest.create()</code></pre>
+            <p>Alternately, <code>rest.js</code> (a UMD module) can be used directly. It exports a factory, optionally taking dependencies, and returns the client constructor/factory:</p>
+            <pre class="prettyprint source lang-html"><code>&lt;script src=&quot;path/to/rest.js&quot;>&lt;/script>
+&lt;script>
+  var MLRest = window.mlRestFactory()
+  var client = MLRest.create()
+&lt;/script></code></pre>
+            <p>See <a href="//joemfb.github.io/ml-rest.js/MLRest.html">API docs</a> for details.</p>
+            <p>This module is pre-release, and subject to change.</p>
+          </article>
+          <div class="symbol-index">
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="MLRest">MLRest</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html" class="!symbol-index-name">MLRest</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#.create" class="!symbol-index-name">MLRest.<wbr>create([options])</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#commitTransaction" class="!symbol-index-name">MLRest#<wbr>commitTransaction(txId)</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#create" class="!symbol-index-name">MLRest#<wbr>create([uri], content[, params])</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#database" class="!symbol-index-name">MLRest#<wbr>database(name)</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#delete" class="!symbol-index-name">MLRest#<wbr>delete(uri[, params])</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#deleteAll" class="!symbol-index-name">MLRest#<wbr>deleteAll([uris][, params])</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#doc" class="!symbol-index-name">MLRest#<wbr>doc(uri[, params])</a>
+            </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#graph" class="!symbol-index-name">MLRest#<wbr>graph([uri][, params])</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#listGraphs" class="!symbol-index-name">MLRest#<wbr>listGraphs()</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#listOptions" class="!symbol-index-name">MLRest#<wbr>listOptions()</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#listValues" class="!symbol-index-name">MLRest#<wbr>listValues([params])</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#openTransaction" class="!symbol-index-name">MLRest#<wbr>openTransaction()</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#options" class="!symbol-index-name">MLRest#<wbr>options(name)</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#request" class="!symbol-index-name">MLRest#<wbr>request(endpoint[, params][, req])</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#rollbackTransaction" class="!symbol-index-name">MLRest#<wbr>rollbackTransaction(txId)</a>
+            </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#search" class="!symbol-index-name">MLRest#<wbr>search([query][, params])</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#suggest" class="!symbol-index-name">MLRest#<wbr>suggest([prefix][, query][, params])</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#things" class="!symbol-index-name">MLRest#<wbr>things(iris[, params])</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#transaction" class="!symbol-index-name">MLRest#<wbr>transaction()</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#transactionDetails" class="!symbol-index-name">MLRest#<wbr>transactionDetails(txId)</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#update" class="!symbol-index-name">MLRest#<wbr>update(uri, content[, params])</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="MLRest.html#values" class="!symbol-index-name">MLRest#<wbr>values(name[, query][, params])</a>
+            </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="MLRest.Database">MLRest.Database</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                <a href="MLRest.Database.html" class="!symbol-index-name">MLRest.<wbr>Database</a>
+            </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="MLRest.Transaction">MLRest.Transaction</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                <a href="MLRest.Transaction.html" class="!symbol-index-name">MLRest.<wbr>Transaction</a>
+            </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="Transaction">Transaction</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                <a href="Transaction.html#.commit" class="!symbol-index-name">Transaction.<wbr>commit()</a>
+            </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                <a href="Transaction.html#.details" class="!symbol-index-name">Transaction.<wbr>details()</a>
+            </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                <a href="Transaction.html#.rollback" class="!symbol-index-name">Transaction.<wbr>rollback()</a>
+            </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <div class="symbol-index-content">
+                <h2 id="deps">deps</h2>
+                <div class="symbol-index-section">
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                <a href="deps.html" class="!symbol-index-name">deps</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="deps.external_fetch.html" class="!symbol-index-name">deps.<wbr>external:fetch</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="deps.external_Headers.html" class="!symbol-index-name">deps.<wbr>external:Headers</a>
+            </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                <a href="deps.external_Promise.html" class="!symbol-index-name">deps.<wbr>external:Promise</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="deps.external_Response.html" class="!symbol-index-name">deps.<wbr>external:Response</a>
+            </dt>
+                      <dd>
+                      </dd>
+                      <dt class="symbol-index-name">
+                <a href="deps.external_URL.html" class="!symbol-index-name">deps.<wbr>external:URL</a>
+            </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                  <div class="symbol-index-column">
+                    <dl class="symbol-index-list">
+                      <dt class="symbol-index-name">
+                <a href="deps.external_URLSearchParams.html" class="!symbol-index-name">deps.<wbr>external:URLSearchParams</a>
+            </dt>
+                      <dd>
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <nav id="jsdoc-toc-nav" role="navigation"></nav>
+    </div>
+  </div>
+  <footer id="jsdoc-footer" class="jsdoc-footer">
+    <div id="jsdoc-footer-container">
+      <p>
+        Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc</a> 3.4.0 on June 1, 2016.
+      </p>
+    </div>
+  </footer>
+  <script src="scripts/jquery.min.js"></script>
+  <script src="scripts/jquery.cookie.js"></script>
+  <script src="scripts/tree.jquery.js"></script>
+  <script src="scripts/prettify.js"></script>
+  <script src="scripts/jsdoc-toc.js"></script>
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/scrollanchor.js"></script>
+</body>
+
+</html>
