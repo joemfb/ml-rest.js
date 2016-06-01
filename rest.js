@@ -8,7 +8,7 @@
   }
 
   if (typeof define === 'function' && define.amd) {
-    define([], factory(self))
+    define([], factory.bind(null, self))
   } else if (typeof module === 'object' && typeof module.exports === 'object') {
     module.exports = factory(self)
   } else {
