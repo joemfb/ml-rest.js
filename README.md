@@ -25,4 +25,6 @@ Alternately, `rest.js` (a UMD module) can be used directly. It exports a factory
 </script>
 ```
 
+See [API docs](//joemfb.github.io/ml-rest.js/MLRest.html) for details.
+
 This module is pre-release, and subject to change.
