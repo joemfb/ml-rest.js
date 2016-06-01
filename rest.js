@@ -478,7 +478,7 @@
           return self.rollbackTransaction(txId)
           .then(function (resp) {
             if (resp.ok) {
-              done('committed')
+              done('rolled-back')
             } else {
               done('failed')
             }
